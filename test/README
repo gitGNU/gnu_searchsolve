@@ -1,0 +1,57 @@
+===== README =====
+
+SearchSolve has experimented with three different kinds of tests:
+   * Each script with its own shell script
+   * A "test runner" script that is generic
+   * Autotest
+
+At the moment, tests are being "transcribed" to use Autotest because
+Autotest does what the hand-made scripts did and more.
+
+
+--- RUNNING TESTS
+
+Tests are run with either of these commands:
+
+      ./testsuite
+      make check
+
+
+./testsuite should be used if arguments need to be specified. You can
+color the output using sed.
+
+      ./testsuite | sed -f color.sed
+      make check | sed -f color.sed
+
+--- WRITING TESTS
+
+Tests go in the "suite" directory, one file per test. It should follow
+this template (but you can add optional things):
+
+
+===============================================================
+# Test "NAME"
+# (COPYRIGHT)
+#
+# (GPL)
+#
+
+AT_SETUP([NAME])
+
+AT_DATA([expout],
+[
+])
+
+
+AT_DATA([search],
+[
+])
+
+AT_DATA([words],
+[
+])
+
+AT_CHECK([PROG search words], [0], [expout])
+
+
+AT_CLEANUP

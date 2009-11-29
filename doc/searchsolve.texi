@@ -1,0 +1,189 @@
+@c     Copyright 2009 Jared Hance
+@c
+@c     This file is part of Searchsolve.
+@c
+@c     Searchsolve is free software: you can redistribute it and/or modify
+@c     it under the terms of the GNU General Public License as published by
+@c     the Free Software Foundation, either version 3 of the License, or
+@c     (at your option) any later version.
+@c
+@c     Searchsolve is distributed in the hope that it will be useful,
+@c     but WITHOUT ANY WARRANTY; without even the implied warranty of
+@c     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+@c     GNU General Public License for more details.
+@c
+@c     You should have received a copy of the GNU General Public License
+@c     along with Searchsolve.  If not, see <http://www.gnu.org/licenses/>.
+
+\input texinfo
+@c %**start of header
+@setfilename searchsolve.info
+@settitle SearchSolve 2.1
+
+@dircategory Individual utilities
+@direntry
+* searchsolve: (searchsolve).   Automatically solve word searches
+@end direntry
+@c %**end of header
+
+@copying
+This manual is for SearchSolve, version 2.0.1.
+
+Copyright @copyright{} 2009 Jared Hance
+
+@end copying
+
+@titlepage
+@title SearchSolve Manual
+@author Jared Hance
+
+@page
+@insertcopying
+
+@end titlepage
+
+@ifnottex
+@node Top
+@top SearchSolve Manual
+
+@end ifnottex
+
+@menu
+* Introduction::                
+* Installation::                
+* Usage::                       
+* SearchView::                  
+* Index::                       
+@end menu
+
+@node Introduction
+@chapter Introduction
+
+SearchSolve is not necessarily designed to be overly easy to use,
+as seen by the fact that it is a terminal application. Instead,
+it is designed to be optimized and efficient for daily use. A primary
+goal of SearchSolve is to provide redistributable output, which are
+in the form of points.
+
+@noindent
+SearchSolve is simple (not to be confused with easy to use).
+It does not have many dependencies, and is built in C to make 
+sure it runs fast. 
+
+@node Installation
+@chapter Installation
+
+Installation of SearchSolve is typically quite simple. We offer
+binaries for most popular platforms, and we provide sourcecode
+with an configure script (generated with Autoconf).
+
+
+@menu
+* Installation from Source::    
+@end menu
+
+@node Installation from Source
+@section Installation from Source
+
+@cindex install
+Installing from source should be as simple as running:
+
+@example
+./configure
+make
+make install
+@end example
+
+
+@noindent
+Optionally, you may run the test suite.
+
+@example
+make check
+@end example
+
+@noindent
+Other formats of the documentation, like html, dvi, and ps, are available. To get a documentation in
+format ``f'', use
+
+@example
+make f
+make install-f
+@end example
+
+@noindent
+For detailed instructions, see INSTALL in the upstream tarball.
+
+
+@node Usage
+@chapter Usage
+
+SearchSolve is run like this:
+@example
+searchsolve WORDSEARCH WORDS [> outfile]
+@end example
+
+@noindent
+As you can see, the way to save to a file is to simply
+use a named pipe.
+
+
+@menu
+* Input::                       
+* Output::                      
+@end menu
+
+@node Input
+@section Input
+
+SearchSolve requires two files to run:
+@itemize
+@item search.txt
+@item words.txt
+@end itemize
+
+@noindent
+These aren't necessarily what the files have to be named, but
+they are a good scheme to follow.
+
+@cindex search
+@noindent
+``search.txt'' must contain the wordsearch. The first line must
+contain the width and the height, seperated by a space. The rest of
+the lines must contain the wordsearch (in that dimension).
+
+@cindex words
+@noindent
+``words.txt'' must contain the words. The first line must contain
+the number of words to load. All subsequent lines must contain one
+word, followed by a newline.
+
+@noindent
+SearchSolve expects both of these to end in a newline.
+
+
+@node Output
+@section Output
+
+SearchSolve outputs locations where each word can be found as points.
+These points are similar to a standard (x,y) plane, except y increases
+as you ``go down'' the grid, so both x and y are always nonnegative
+since the origin is the topleft corner.
+
+@noindent
+These results are immediately suitable for redistributation.
+
+
+@node SearchView
+@chapter SearchView
+
+SearchView is an extra binary distributed with SearchSolve that generates
+graphical output. It is run in the same was as ``searchsolve'' but with
+the command ``searchview''
+
+@node Index
+@unnumbered Index
+
+@printindex cp
+
+@bye

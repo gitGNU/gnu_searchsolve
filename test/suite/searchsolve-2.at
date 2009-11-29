@@ -1,0 +1,30 @@
+AT_SETUP([searchsolve-2])
+
+AT_DATA([expout],
+[a : (1,1) (1,1)
+a : (1,1) (1,1)
+a : (1,1) (1,1)
+a : (1,1) (1,1)
+a : (1,1) (1,1)
+a : (1,1) (1,1)
+a : (1,1) (1,1)
+a : (1,1) (1,1)
+])
+
+
+AT_DATA([search],
+[3 3
+bbb
+bab
+bbb
+])
+
+AT_DATA([words],
+[1
+a
+])
+
+AT_CHECK([searchsolve search words], [0], [expout])
+
+
+AT_CLEANUP

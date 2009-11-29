@@ -1,0 +1,17 @@
+For INSTALL info, see INSTALL...
+
+================================
+
+--- GENERAL INFO
+
+Please run "make check" to run tests. 
+(Pipe to "sed -f test/color.sed" for color)
+
+
+x
+At the moment, the build process is something like
+this:
+
+Compile libsearchsolve.a (Static only)
+Link searchsolve and searchview with libsearchsolve.a
+Link test-driver with libsearchsolve.a (For make check)
