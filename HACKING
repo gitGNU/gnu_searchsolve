@@ -1,0 +1,29 @@
+Read this: http://savannah.gnu.org/maintenance/UsingGit
+
+We use two collaborative workflows:
+   - Merge (official devs)
+   - Patch (everyone else)
+
+
+=== MERGE
+
+The merge workflow is only for official devs since it requires write access
+to the git repository. Collaboration is easier since merges are easier to
+resolve than a patch.
+
+It works by making a branch, switching to that branch, making changes,
+switching to master, merging from the main repository at savannah, and
+then merging in your changes from the other branch.
+
+Finally, you can push your changes to the upstream repository.
+
+
+=== PATCH
+
+Since not everyone has write access to the git repository, we cannot support
+merge workflow with them. Before making a patch with git-format-patch, you must
+make sure to rebase so that it is possibly to successfully apply the patch.
+
+Make the patches and send them to our development mailing list (see savannah).
+If they do not merge successfully, you will get a reply asking you to rebase
+and reformat your patches.
