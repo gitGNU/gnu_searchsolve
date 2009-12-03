@@ -42,6 +42,6 @@ Since not everyone has write access to the git repository, we cannot support
 merge workflow with them. Before making a patch with git-format-patch, you must
 make sure to rebase so that it is possibly to successfully apply the patch.
 
-Make the patches and send them to our development mailing list (see savannah).
+Make the patches and send them to our mailing list (see savannah).
 If they do not merge successfully, you will get a reply asking you to rebase
 and reformat your patches.
