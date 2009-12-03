@@ -41,4 +41,12 @@
 # define __bool_true_false_are_defined 1
 #endif
 
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
+#if HAVE_GETOPT_H
+#include <getopt.h>
+#endif
+
 #endif /* COMMON_H */

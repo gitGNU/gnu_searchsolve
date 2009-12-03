@@ -20,13 +20,10 @@
 
 lib_LIBRARIES = libsearchsolve.a
 libsearchsolve_a_SOURCES = wordsearch.c words.c
-bin_PROGRAMS = searchsolve searchview
+bin_PROGRAMS = searchsolve
 
 searchsolve_SOURCES = searchsolve.c
 searchsolve_LDADD = libsearchsolve.a
-
-searchview_SOURCES = searchview.c
-searchview_LDADD = libsearchsolve.a
 
 noinst_HEADERS = \
 	wordsearch.h \

@@ -22,17 +22,60 @@
 #include "wordsearch.h"
 #include "words.h"
 
+static struct option long_options[] = {
+    {"version", no_argument, 0, 'v'},
+    {"help", no_argument, 0, 'h'},
+    {"graphical", no_argument, 0, 'g'}
+}; 
+
+void printUsage();
+void printVersion();
 
 int main(int argc, char** argv) {
-    if(argc != 3) {
-	printf("Usage: WORDSEARCH WORDS\n");
+    int graphicalFlag = 0;
+
+    char* optstr = "vhg";
+    int optionIndex = 0;
+    char c;
+
+    c = getopt_long(argc, argv, optstr, long_options, &optionIndex);
+    while(c >= 0) {
+	switch(c) {
+	case 'v':
+	    printVersion();
+	    return 0;
+	case 'h':
+	    printUsage();
+	    return 0;
+	case 'g':
+	    graphicalFlag = 1;
+	    break;
+	}
+	c = getopt_long(argc, argv, optstr, long_options, &optionIndex);
+    }
+
+    char* wordsearchLoc;
+    char* wordsLoc;
+
+    if(optind >= argc) {
+	printUsage();
 	return 0;
     }
 
-    Wordsearch search = readWordsearch(argv[1]);
+    wordsearchLoc = argv[optind];
+    optind++;
+
+    if(optind >= argc) {
+	printUsage();
+	return 0;
+    }
+
+    wordsLoc = argv[optind];
+
+    Wordsearch search = readWordsearch(wordsearchLoc);
 
     int numWords;
-    char** words = readWords(argv[2], &numWords);
+    char** words = readWords(wordsLoc, &numWords);
 
     if(words == NULL) {
 	fprintf(stderr, "Failed to read words.\n");
@@ -46,16 +89,34 @@ int main(int argc, char** argv) {
 	int numLocs;
 	Location* locs = solve(search, word, &numLocs);
 	
-	int a;
-	for(a = 0; a < numLocs; a++) {
-	    printf("%s : (%d,%d) (%d,%d)\n",
-		  word,
-		  locs[a].x1,
-		  locs[a].y1,
-		  locs[a].x2,
-		  locs[a].y2);
+	if(!graphicalFlag) {
+	    int a;
+	    for(a = 0; a < numLocs; a++) {
+		printf("%s : (%d,%d) (%d,%d)\n",
+		       word,
+		       locs[a].x1,
+		       locs[a].y1,
+		       locs[a].x2,
+		       locs[a].y2);
+	    }
+	}
+	else {
+	    printf("%s:\n", word);
+	    printLocs(search, locs, numLocs);
+	    printf("\n");
 	}
     }
 
     return 0;
+}
+
+void printUsage() {
+    printf("Usage: searchsolve WORDSEARCH WORDS [options]\n");
+    printf("       --version           Print version info\n");
+    printf("       --help              Print help info\n");
+    printf("       -g, --graphical     Print grapical output\n");
+}
+
+void printVersion() {
+    printf("Searchsolve version " PACKAGE_VERSION "\n");
 }
