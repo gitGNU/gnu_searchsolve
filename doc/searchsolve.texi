@@ -18,7 +18,7 @@
 \input texinfo
 @c %**start of header
 @setfilename searchsolve.info
-@settitle SearchSolve 2.1
+@settitle Searchsolve 2.1
 
 @dircategory Individual utilities
 @direntry
