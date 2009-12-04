@@ -52,7 +52,6 @@ Copyright @copyright{} 2009 Jared Hance
 * Introduction::                
 * Installation::                
 * Usage::                       
-* SearchView::                  
 * Index::                       
 @end menu
 
@@ -120,7 +119,7 @@ For detailed instructions, see INSTALL in the upstream tarball.
 
 SearchSolve is run like this:
 @example
-searchsolve WORDSEARCH WORDS [> outfile]
+searchsolve [options] WORDSEARCH WORDS [> outfile]
 @end example
 
 @noindent
@@ -131,6 +130,7 @@ use a named pipe.
 @menu
 * Input::                       
 * Output::                      
+* Graphical Output::            
 @end menu
 
 @node Input
@@ -174,12 +174,10 @@ since the origin is the topleft corner.
 These results are immediately suitable for redistributation.
 
 
-@node SearchView
-@chapter SearchView
+@node Graphical Output
+@section Graphical Output
 
-SearchView is an extra binary distributed with SearchSolve that generates
-graphical output. It is run in the same was as ``searchsolve'' but with
-the command ``searchview''
+Using the ``-g'' option changes the output style to a graphical grid.
 
 @node Index
 @unnumbered Index
