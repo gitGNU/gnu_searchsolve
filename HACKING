@@ -30,10 +30,14 @@ to the git repository. Collaboration is easier since merges are easier to
 resolve than a patch.
 
 It works by making a branch, switching to that branch, making changes,
-switching to master, merging from the main repository at savannah, and
+switching to master, pulling from the main repository at savannah, and
 then merging in your changes from the other branch.
 
 Finally, you can push your changes to the upstream repository.
+
+NOTE: If you are not an official dev this is possible if you publish your
+repository in a place that an official dev can access. They will have to
+do the merge step.
 
 
 === PATCH
