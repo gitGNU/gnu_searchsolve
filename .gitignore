@@ -28,7 +28,10 @@ test-driver
 
 # Prog
 searchsolve/searchsolve
-searchview
+
+# Testsuite
+test/testsuite
+test/package.m4
 
 # Logs
 *.log
@@ -43,4 +46,3 @@ test-old
 # Documentation
 *.info
 *.html
-

@@ -1,9 +1,3 @@
-AM_CPPFLAGS = -I $(top_srcdir)/searchsolve
-
-check_PROGRAMS = test-driver
-test_driver_SOURCES = test-driver.c
-test_driver_LDADD = $(top_builddir)/searchsolve/libsearchsolve.a
-
 # The `:;' works around a Bash 3.2 bug when the output is not writeable.
 $(srcdir)/package.m4: $(top_srcdir)/configure.ac
 	:;{ \

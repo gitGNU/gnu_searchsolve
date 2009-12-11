@@ -4,10 +4,7 @@ AT_INIT
 
 AT_COPYRIGHT([Copyright (C) 2009 Jared Hance])
 
-AT_TESTED([searchsolve test-driver])
-
-AT_BANNER([readWords])
-m4_include([suite/readWords-1.at])
+AT_TESTED([searchsolve])
 
 AT_BANNER([searchsolve])
 m4_include([suite/searchsolve-1.at])
