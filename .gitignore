@@ -39,3 +39,8 @@ searchview
 
 # Legacy
 test-old
+
+# Documentation
+*.info
+*.html
+
