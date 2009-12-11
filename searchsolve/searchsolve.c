@@ -112,9 +112,9 @@ int main(int argc, char** argv) {
 
 void printUsage() {
     printf("Usage: searchsolve WORDSEARCH WORDS [options]\n");
-    printf("       --version           Print version info\n");
-    printf("       --help              Print help info\n");
-    printf("       -g, --graphical     Print grapical output\n");
+    printf("       -v  --version           Print version info\n");
+    printf("       -h  --help              Print help info\n");
+    printf("       -g  --graphical         Print grapical output\n");
 }
 
 void printVersion() {
