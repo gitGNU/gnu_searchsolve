@@ -579,7 +579,6 @@ at_change_dir=false
 
 # List of the tested programs.
 at_tested='searchsolve
-searchview
 test-driver'
 # List of the all the test groups.
 at_groups_all=' 1 2 3'
@@ -855,7 +854,7 @@ fi
 # List of tests.
 if $at_list_p; then
   cat <<_ATEOF || at_write_fail=1
-searchsolve 2.1 test suite test groups:
+searchsolve 2.2a test suite test groups:
 
  NUM: FILE-NAME:LINE     TEST-GROUP-NAME
       KEYWORDS
@@ -904,7 +903,7 @@ _ATEOF
   exit $at_write_fail
 fi
 if $at_version_p; then
-  $as_echo "$as_me (searchsolve 2.1)" &&
+  $as_echo "$as_me (searchsolve 2.2a)" &&
   cat <<\_ATEOF || at_write_fail=1
 
 Copyright (C) 2009 Free Software Foundation, Inc.
@@ -1092,15 +1091,15 @@ exec 5>>"$at_suite_log"
 
 # Banners and logs.
 cat <<\_ASBOX
-## --------------------------- ##
-## searchsolve 2.1 test suite. ##
-## --------------------------- ##
+## ---------------------------- ##
+## searchsolve 2.2a test suite. ##
+## ---------------------------- ##
 _ASBOX
 {
   cat <<\_ASBOX
-## --------------------------- ##
-## searchsolve 2.1 test suite. ##
-## --------------------------- ##
+## ---------------------------- ##
+## searchsolve 2.2a test suite. ##
+## ---------------------------- ##
 _ASBOX
   echo
 
@@ -1924,7 +1923,7 @@ _ASBOX
   $as_echo "Please send \`${at_testdir+${at_testdir}/}$as_me.log' and all information you think might help:
 
    To: <searchsolve-users@lists.launchpad.net>
-   Subject: [searchsolve 2.1] $as_me: $at_fail_list${at_fail_list:+ failed${at_xpass_list:+, }}$at_xpass_list${at_xpass_list:+ passed unexpectedly}
+   Subject: [searchsolve 2.2a] $as_me: $at_fail_list${at_fail_list:+ failed${at_xpass_list:+, }}$at_xpass_list${at_xpass_list:+ passed unexpectedly}
 "
   if test $at_debug_p = false; then
     echo

@@ -4,9 +4,9 @@ m4_define([AT_PACKAGE_NAME],
 m4_define([AT_PACKAGE_TARNAME],
   [searchsolve])
 m4_define([AT_PACKAGE_VERSION],
-  [2.1])
+  [2.2a])
 m4_define([AT_PACKAGE_STRING],
-  [searchsolve 2.1])
+  [searchsolve 2.2a])
 m4_define([AT_PACKAGE_BUGREPORT],
   [searchsolve-users@lists.launchpad.net])
 m4_define([AT_PACKAGE_URL],
