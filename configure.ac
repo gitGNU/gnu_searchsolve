@@ -28,9 +28,7 @@ AC_CONFIG_FILES([Makefile searchsolve/Makefile test/Makefile doc/Makefile])
 
 AC_CONFIG_AUX_DIR([build-aux])
 
-#__MAGIC__
 AM_INIT_AUTOMAKE([-Wall silent-rules])
-#__MAGIC__
 
 # Autotest
 AC_CONFIG_TESTDIR([test], [searchsolve:test])
