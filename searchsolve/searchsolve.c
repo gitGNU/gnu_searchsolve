@@ -21,6 +21,7 @@
 #include "common.h"
 #include "wordsearch.h"
 #include "words.h"
+#include "retcode.h"
 
 static struct option long_options[] = {
     {"version", no_argument, 0, 'v'},
@@ -43,10 +44,10 @@ int main(int argc, char** argv) {
 	switch(c) {
 	case 'v':
 	    printVersion();
-	    return 0;
+	    return RET_OKAY;
 	case 'h':
 	    printUsage();
-	    return 0;
+	    return RET_OKAY;
 	case 'g':
 	    graphicalFlag = 1;
 	    break;
@@ -59,7 +60,7 @@ int main(int argc, char** argv) {
 
     if(optind >= argc) {
 	printUsage();
-	return 0;
+	return RET_OKAY;
     }
 
     wordsearchLoc = argv[optind];
@@ -67,7 +68,7 @@ int main(int argc, char** argv) {
 
     if(optind >= argc) {
 	printUsage();
-	return 0;
+	return RET_OKAY;
     }
 
     wordsLoc = argv[optind];
@@ -79,7 +80,7 @@ int main(int argc, char** argv) {
 
     if(words == NULL) {
 	fprintf(stderr, "Failed to read words.\n");
-	return 5;
+	return RET_FILE_FORMAT_ERROR;
     }
 
     int i;
@@ -107,7 +108,7 @@ int main(int argc, char** argv) {
 	}
     }
 
-    return 0;
+    return RET_OKAY;
 }
 
 void printUsage() {

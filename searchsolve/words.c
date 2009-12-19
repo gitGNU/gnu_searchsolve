@@ -20,20 +20,21 @@
 
 #include "common.h"
 #include "words.h"
+#include "retcode.h"
 
 char** readWords(char* loc, int* numWords) {
     FILE* wordFile = fopen(loc, "r");
     
     if(wordFile == NULL) {
 	fprintf(stderr, "Could not find file: %s\n", loc);
-	exit(2);
+	exit(RET_FILE_ERROR);
     }
    
     int result = fscanf(wordFile, "%d\n", numWords);
 
     if(result < 1) {
 	fprintf(stderr, "First line of words file must contain number of words.\n");
-	exit(4);
+	exit(RET_FILE_FORMAT_ERROR);
     }
 
     char** words = malloc(sizeof(char*) * (*numWords));
@@ -51,7 +52,7 @@ char** readWords(char* loc, int* numWords) {
 
 	if(result < 1) {
 	    fprintf(stderr, "Malformed words file. Could not read word.\n");
-	    exit(4);
+	    exit(RET_FILE_FORMAT_ERROR);
 	}
     }
 

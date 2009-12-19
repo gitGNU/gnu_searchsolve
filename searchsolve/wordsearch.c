@@ -18,6 +18,7 @@
 
 #include "common.h"
 #include "wordsearch.h"
+#include "retcode.h"
 
 #define PRINT_EMPTY_CHAR '*'
 
@@ -25,7 +26,7 @@ Wordsearch readWordsearch(char* loc) {
     FILE* file = fopen(loc, "r");
     if(file == NULL) {
 	fprintf(stderr, "Could not find file: %s\n", loc);
-	exit(2);
+	exit(RET_FILE_ERROR);
     }
 
     Wordsearch wordsearch;
@@ -37,13 +38,13 @@ Wordsearch readWordsearch(char* loc) {
 
     if(result < 2) {
 	fprintf(stderr, "Error: Bad first line of search file.\n");
-	exit(3);
+	exit(RET_FILE_FORMAT_ERROR);
     }
 
     wordsearch.grid = malloc(sizeof(char*) * wordsearch.width);
     if(wordsearch.grid == NULL) {
 	fprintf(stderr, "Out of memory while allocating grid.\n");
-	exit(1);
+	exit(RET_MEM_ERROR);
     }
     
     int i;
@@ -51,7 +52,7 @@ Wordsearch readWordsearch(char* loc) {
 	wordsearch.grid[i] = malloc(sizeof(char) * wordsearch.height);
 	if(wordsearch.grid[i] == NULL) {
 	    fprintf(stderr, "Out of memory while allocating grid.\n");
-	    exit(1);
+	    exit(RET_MEM_ERROR);
 	}
     }
 
@@ -62,7 +63,7 @@ Wordsearch readWordsearch(char* loc) {
 	    int result = fscanf(file, "%c", &(wordsearch.grid[col][row]));
 	    if(result < 1) {
 		fprintf(stderr, "Malformed search file. Could not read char.");
-		exit(4);
+		exit(RET_FILE_FORMAT_ERROR);
 	    }
 	}
 	int result = fscanf(file, "\n");
@@ -87,7 +88,7 @@ void addLocation(Location** locs, int* numLocs, int x1, int y1, int x2, int y2) 
     if(*locs == NULL) {
 	fprintf(stderr,
 	      "Out of memory while allocation space for location\n");
-	exit(1);
+	exit(RET_MEM_ERROR);
     }
     (*locs)[*numLocs] = createLoc((x1), (y1), (x2), (y2));
     (*numLocs)++;
@@ -99,7 +100,7 @@ void addLocation(Location** locs, int* numLocs, int x1, int y1, int x2, int y2) 
     if(locs == NULL) {							\
 	fprintf(stderr,							\
 	      "Out of memory while allocation space for location\n");	\
-	exit(1);							\
+	exit(RET_CODE_ERROR);							\
     }									\
     locs[*numLocs] = createLoc((x1), (y1), (x2), (y2));			\
     (*numLocs)++;
@@ -256,7 +257,7 @@ void printLocs(Wordsearch search, Location* locs, int numLocs) {
     char** grid = malloc(sizeof(char*) * search.width);
     if(grid == NULL) {
 	fprintf(stderr, "Out of memory while allocating printing grid");
-	exit(1);
+	exit(RET_MEM_ERROR);
     }
     
     int i;
@@ -264,7 +265,7 @@ void printLocs(Wordsearch search, Location* locs, int numLocs) {
 	grid[i] = malloc(sizeof(char) * search.height);
 	if(grid[i] == NULL) {
 	    fprintf(stderr, "Out of memory while allocating printing grid");
-	    exit(1);
+	    exit(RET_MEM_ERROR);
 	}
 
 	/* Clear the grid */
