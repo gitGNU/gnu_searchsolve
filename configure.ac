@@ -19,7 +19,7 @@ dnl     along with Searchsolve.  If not, see <http://www.gnu.org/licenses/>.
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT([searchsolve], [2.2a], [searchsolve-users@lists.launchpad.net])
+AC_INIT([searchsolve], [2.2a], [searchsolve-discuss@nongnu.org])
 
 
 AC_CONFIG_SRCDIR([searchsolve/wordsearch.c])
