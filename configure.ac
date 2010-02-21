@@ -1,8 +1,8 @@
 dnl     Copyright 2009 Jared Hance
 dnl     
-dnl     This file is part of Foobar.
+dnl     This file is part of Searchsolve
 dnl     
-dnl     Foobar is free software: you can redistribute it and/or modify
+dnl     Searchsolve is free software: you can redistribute it and/or modify
 dnl     it under the terms of the GNU General Public License as published by
 dnl     the Free Software Foundation, either version 3 of the License, or
 dnl     (at your option) any later version.
