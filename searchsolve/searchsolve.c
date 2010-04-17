@@ -71,46 +71,47 @@ int main(int argc, char** argv) {
     wordsearchLoc = argv[optind];
     optind++;
 
-    if(optind >= argc) {
+    if(optind >= argc && !interactiveFlag) {
 	printUsage();
 	return RET_OKAY;
     }
 
-    wordsLoc = argv[optind];
-
     Wordsearch search = readWordsearch(wordsearchLoc);
 
-    int numWords;
-    char** words = readWords(wordsLoc, &numWords);
+    if(!interactiveFlag) {
+        wordsLoc = argv[optind];
+        int numWords;
+        char** words = readWords(wordsLoc, &numWords);
 
-    if(words == NULL) {
-	fprintf(stderr, "Failed to read words.\n");
-	return RET_FILE_FORMAT_ERROR;
-    }
+        if(words == NULL) {
+	    fprintf(stderr, "Failed to read words.\n");
+	    return RET_FILE_FORMAT_ERROR;
+        }
 
-    int i;
-    for(i = 0; i < numWords; i++) {
-	char* word = words[i];
+        int i;
+        for(i = 0; i < numWords; i++) {
+	    char* word = words[i];
 
-	int numLocs;
-	Location* locs = solve(search, word, &numLocs);
+	    int numLocs;
+	    Location* locs = solve(search, word, &numLocs);
 	
-	if(!graphicalFlag) {
-	    int a;
-	    for(a = 0; a < numLocs; a++) {
-		printf("%s : (%d,%d) (%d,%d)\n",
-		       word,
-		       locs[a].x1,
-		       locs[a].y1,
-		       locs[a].x2,
-		       locs[a].y2);
+	    if(!graphicalFlag) {
+	        int a;
+	        for(a = 0; a < numLocs; a++) {
+		    printf("%s : (%d,%d) (%d,%d)\n",
+		        word,
+		        locs[a].x1,
+		        locs[a].y1,
+		        locs[a].x2,
+		        locs[a].y2);
+	        }
 	    }
-	}
-	else {
-	    printf("%s:\n", word);
-	    printLocs(search, locs, numLocs);
-	    printf("\n");
-	}
+	    else {
+	        printf("%s:\n", word);
+	        printLocs(search, locs, numLocs);
+	        printf("\n");
+	    }
+        }
     }
 
     return RET_OKAY;
