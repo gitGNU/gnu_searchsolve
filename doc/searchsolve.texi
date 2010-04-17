@@ -27,14 +27,14 @@
 @c %**end of header
 
 @copying
-This manual is for SearchSolve, version 2.2.
+This manual is for Searchsolve, version 2.2.
 
 Copyright @copyright{} 2009 Jared Hance
 
 @end copying
 
 @titlepage
-@title SearchSolve Manual
+@title Searchsolve Manual
 @author Jared Hance
 
 @page
@@ -44,7 +44,7 @@ Copyright @copyright{} 2009 Jared Hance
 
 @ifnottex
 @node Top
-@top SearchSolve Manual
+@top Searchsolve Manual
 
 @end ifnottex
 
@@ -58,21 +58,21 @@ Copyright @copyright{} 2009 Jared Hance
 @node Introduction
 @chapter Introduction
 
-SearchSolve is not necessarily designed to be overly easy to use,
+Searchsolve is not necessarily designed to be overly easy to use,
 as seen by the fact that it is a terminal application. Instead,
 it is designed to be optimized and efficient for daily use. A primary
-goal of SearchSolve is to provide redistributable output, which are
+goal of Searchsolve is to provide redistributable output, which are
 in the form of points.
 
 @noindent
-SearchSolve is simple (not to be confused with easy to use).
+Searchsolve is simple (not to be confused with easy to use).
 It does not have many dependencies, and is built in C to make 
 sure it runs fast. 
 
 @node Installation
 @chapter Installation
 
-Installation of SearchSolve is typically quite simple. We offer
+Installation of Searchsolve is typically quite simple. We offer
 binaries for most popular platforms, and we provide sourcecode
 with an configure script (generated with Autoconf).
 
@@ -117,7 +117,7 @@ For detailed instructions, see INSTALL in the upstream tarball.
 @node Usage
 @chapter Usage
 
-SearchSolve is run like this:
+Searchsolve is run like this:
 @example
 searchsolve [options] WORDSEARCH WORDS [> outfile]
 @end example
@@ -136,7 +136,7 @@ use a named pipe.
 @node Input
 @section Input
 
-SearchSolve requires two files to run:
+Searchsolve requires two files to run:
 @itemize
 @item search.txt
 @item words.txt
@@ -159,13 +159,13 @@ the number of words to load. All subsequent lines must contain one
 word, followed by a newline.
 
 @noindent
-SearchSolve expects both of these to end in a newline.
+Searchsolve expects both of these to end in a newline.
 
 
 @node Output
 @section Output
 
-SearchSolve outputs locations where each word can be found as points.
+Searchsolve outputs locations where each word can be found as points.
 These points are similar to a standard (x,y) plane, except y increases
 as you ``go down'' the grid, so both x and y are always nonnegative
 since the origin is the topleft corner.
