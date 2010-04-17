@@ -99,8 +99,13 @@ int main(int argc, char** argv) {
         while(true) {
             char word[MAX_WORD_LEN];
             scanf("%s", word);
-
-            handleWord(word, search, graphicalFlag);
+            
+            if(strcmp(word, "END_INTERACTIVE") != 0) {
+                handleWord(word, search, graphicalFlag);
+            }
+            else {
+                break;
+            }
         }
     }
     return RET_OKAY;
