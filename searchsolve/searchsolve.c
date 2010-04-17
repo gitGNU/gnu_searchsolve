@@ -26,7 +26,8 @@
 static struct option long_options[] = {
     {"version", no_argument, 0, 'v'},
     {"help", no_argument, 0, 'h'},
-    {"graphical", no_argument, 0, 'g'}
+    {"graphical", no_argument, 0, 'g'},
+    {"interactive", no_argument, 0, 'i'}
 }; 
 
 void printUsage();
@@ -34,8 +35,9 @@ void printVersion();
 
 int main(int argc, char** argv) {
     int graphicalFlag = 0;
+    int interactiveFlag = 0;
 
-    char* optstr = "vhg";
+    char* optstr = "vhgi";
     int optionIndex = 0;
     char c;
 
@@ -51,6 +53,9 @@ int main(int argc, char** argv) {
 	case 'g':
 	    graphicalFlag = 1;
 	    break;
+        case 'i':
+            interactiveFlag = 1;
+            break;
 	}
 	c = getopt_long(argc, argv, optstr, long_options, &optionIndex);
     }
@@ -116,6 +121,7 @@ void printUsage() {
     printf("       -v  --version           Print version info\n");
     printf("       -h  --help              Print help info\n");
     printf("       -g  --graphical         Print grapical output\n");
+    printf("       -i  --interactive       Interactively type words\n");
 }
 
 void printVersion() {
