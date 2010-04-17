@@ -100,6 +100,9 @@ int main(int argc, char** argv) {
 		       locs[a].x2,
 		       locs[a].y2);
 	    }
+            if(numLocs == 0) {
+                printf("%s : Not found\n", word);
+            }
 	}
 	else {
 	    printf("%s:\n", word);
