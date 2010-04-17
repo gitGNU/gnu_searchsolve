@@ -28,4 +28,5 @@ searchsolve_LDADD = libsearchsolve.a
 noinst_HEADERS = \
 	wordsearch.h \
 	words.h \
-	common.h
+	common.h \
+        retcode.h
