@@ -30,6 +30,7 @@ static struct option long_options[] = {
     {"interactive", no_argument, 0, 'i'}
 }; 
 
+void handleWord(char* word, Wordsearch search, int graphicalFlag);
 void printUsage();
 void printVersion();
 
@@ -91,32 +92,35 @@ int main(int argc, char** argv) {
         int i;
         for(i = 0; i < numWords; i++) {
 	    char* word = words[i];
-
-	    int numLocs;
-	    Location* locs = solve(search, word, &numLocs);
-	
-	    if(!graphicalFlag) {
-	        int a;
-	        for(a = 0; a < numLocs; a++) {
-		    printf("%s : (%d,%d) (%d,%d)\n",
-		        word,
-		        locs[a].x1,
-		        locs[a].y1,
-		        locs[a].x2,
-		        locs[a].y2);
-	        }
-	    }
-	    else {
-	        printf("%s:\n", word);
-	        printLocs(search, locs, numLocs);
-	        printf("\n");
-	    }
-        }
+            handleWord(word, search, graphicalFlag);
+	}
     }
 
     return RET_OKAY;
 }
 
+void handleWord(char* word, Wordsearch search, int graphicalFlag) {
+    int numLocs;
+    Location* locs = solve(search, word, &numLocs);
+    
+    if(!graphicalFlag) {
+	int a;
+	for(a = 0; a < numLocs; a++) {
+    	    printf("%s : (%d,%d) (%d,%d)\n",
+    	        word,
+	        locs[a].x1,
+	        locs[a].y1,
+	        locs[a].x2,
+	        locs[a].y2);
+	}
+    }
+    else {
+	printf("%s:\n", word);
+	printLocs(search, locs, numLocs);
+	printf("\n");
+    }
+ 
+}
 void printUsage() {
     printf("Usage: searchsolve WORDSEARCH WORDS [options]\n");
     printf("       -v  --version           Print version info\n");
