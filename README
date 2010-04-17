@@ -27,4 +27,3 @@ this:
 
 Compile libsearchsolve.a (Static only)
 Link searchsolve and searchview with libsearchsolve.a
-Link test-driver with libsearchsolve.a (For make check)
