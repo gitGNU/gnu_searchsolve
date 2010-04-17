@@ -26,16 +26,19 @@
 static struct option long_options[] = {
     {"version", no_argument, 0, 'v'},
     {"help", no_argument, 0, 'h'},
-    {"graphical", no_argument, 0, 'g'}
+    {"graphical", no_argument, 0, 'g'},
+    {"interactive", no_argument, 0, 'i'}
 }; 
 
+void handleWord(char* word, Wordsearch search, int graphicalFlag);
 void printUsage();
 void printVersion();
 
 int main(int argc, char** argv) {
     int graphicalFlag = 0;
+    int interactiveFlag = 0;
 
-    char* optstr = "vhg";
+    char* optstr = "vhgi";
     int optionIndex = 0;
     char c;
 
@@ -51,6 +54,9 @@ int main(int argc, char** argv) {
 	case 'g':
 	    graphicalFlag = 1;
 	    break;
+        case 'i':
+            interactiveFlag = 1;
+            break;
 	}
 	c = getopt_long(argc, argv, optstr, long_options, &optionIndex);
     }
@@ -66,59 +72,76 @@ int main(int argc, char** argv) {
     wordsearchLoc = argv[optind];
     optind++;
 
-    if(optind >= argc) {
+    if(optind >= argc && !interactiveFlag) {
 	printUsage();
 	return RET_OKAY;
     }
 
-    wordsLoc = argv[optind];
-
     Wordsearch search = readWordsearch(wordsearchLoc);
 
-    int numWords;
-    char** words = readWords(wordsLoc, &numWords);
+    if(!interactiveFlag) {
+        wordsLoc = argv[optind];
+        int numWords;
+        char** words = readWords(wordsLoc, &numWords);
 
-    if(words == NULL) {
-	fprintf(stderr, "Failed to read words.\n");
-	return RET_FILE_FORMAT_ERROR;
+        if(words == NULL) {
+	    fprintf(stderr, "Failed to read words.\n");
+	    return RET_FILE_FORMAT_ERROR;
+        }
+
+        int i;
+        for(i = 0; i < numWords; i++) {
+	    char* word = words[i];
+            handleWord(word, search, graphicalFlag);
+	}
     }
-
-    int i;
-    for(i = 0; i < numWords; i++) {
-	char* word = words[i];
-
-	int numLocs;
-	Location* locs = solve(search, word, &numLocs);
-	
-	if(!graphicalFlag) {
-	    int a;
-	    for(a = 0; a < numLocs; a++) {
-		printf("%s : (%d,%d) (%d,%d)\n",
-		       word,
-		       locs[a].x1,
-		       locs[a].y1,
-		       locs[a].x2,
-		       locs[a].y2);
-	    }
-            if(numLocs == 0) {
-                printf("%s : Not found\n", word);
+    else {
+        while(true) {
+            char word[MAX_WORD_LEN];
+            scanf("%s", word);
+            
+            if(strcmp(word, "END_INTERACTIVE") != 0) {
+                handleWord(word, search, graphicalFlag);
             }
-	}
-	else {
-	    printf("%s:\n", word);
-	    printLocs(search, locs, numLocs);
-	    printf("\n");
-	}
+            else {
+                break;
+            }
+        }
     }
-
     return RET_OKAY;
 }
 
+void handleWord(char* word, Wordsearch search, int graphicalFlag) {
+    int numLocs;
+    Location* locs = solve(search, word, &numLocs);
+    
+    if(!graphicalFlag) {
+	int a;
+	for(a = 0; a < numLocs; a++) {
+    	    printf("%s : (%d,%d) (%d,%d)\n",
+    	        word,
+	        locs[a].x1,
+	        locs[a].y1,
+	        locs[a].x2,
+	        locs[a].y2);
+	}
+        if(numLocs == 0) {
+            printf("%s : Not found\n", word);
+        }
+    }
+    else {
+	printf("%s:\n", word);
+	printLocs(search, locs, numLocs);
+	printf("\n");
+    }
+ 
+}
 void printUsage() {
     printf("Usage: searchsolve WORDSEARCH WORDS [options]\n");
     printf("       -v  --version           Print version info\n");
     printf("       -h  --help              Print help info\n");
     printf("       -g  --graphical         Print grapical output\n");
+    printf("       -i  --interactive       Interactively type words\n");
 }
 
 void printVersion() {
