@@ -95,7 +95,14 @@ int main(int argc, char** argv) {
             handleWord(word, search, graphicalFlag);
 	}
     }
+    else {
+        while(true) {
+            char word[MAX_WORD_LEN];
+            scanf("%s", word);
 
+            handleWord(word, search, graphicalFlag);
+        }
+    }
     return RET_OKAY;
 }
 
