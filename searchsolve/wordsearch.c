@@ -247,7 +247,7 @@ Location* solve(Wordsearch search, char* word, int* numLocs) {
 }
 
 /*
- * This is the core of searchview
+ * This is the core of graphical mode
  * Makes textual output for the words
  * Based on their locations from solve
  */
