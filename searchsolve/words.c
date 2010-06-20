@@ -24,36 +24,36 @@
 
 char** readWords(char* loc, int* numWords) {
     FILE* wordFile = fopen(loc, "r");
-    
+
     if(wordFile == NULL) {
-	fprintf(stderr, "Could not find file: %s\n", loc);
-	exit(RET_FILE_ERROR);
+        fprintf(stderr, "Could not find file: %s\n", loc);
+        exit(RET_FILE_ERROR);
     }
-   
+
     int result = fscanf(wordFile, "%d\n", numWords);
 
     if(result < 1) {
-	fprintf(stderr, "First line of words file must contain number of words.\n");
-	exit(RET_FILE_FORMAT_ERROR);
+        fprintf(stderr, "First line of words file must contain number of words.\n");
+        exit(RET_FILE_FORMAT_ERROR);
     }
 
     char** words = malloc(sizeof(char*) * (*numWords));
     if(words == NULL) {
-	fprintf(stderr, "Out of memory while allocating words.");
+        fprintf(stderr, "Out of memory while allocating words.");
     }
 
     int i;
     for(i = 0; i < *numWords; i++) {
-	words[i] = malloc(sizeof(char) * MAX_WORD_LEN);
+        words[i] = malloc(sizeof(char) * MAX_WORD_LEN);
 
-	char* word;
+        char* word;
 
-	int result = fscanf(wordFile, "%255s\n", words[i]);
+        int result = fscanf(wordFile, "%255s\n", words[i]);
 
-	if(result < 1) {
-	    fprintf(stderr, "Malformed words file. Could not read word.\n");
-	    exit(RET_FILE_FORMAT_ERROR);
-	}
+        if(result < 1) {
+            fprintf(stderr, "Malformed words file. Could not read word.\n");
+            exit(RET_FILE_FORMAT_ERROR);
+        }
     }
 
     return words;

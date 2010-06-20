@@ -44,37 +44,37 @@ int main(int argc, char** argv) {
 
     c = getopt_long(argc, argv, optstr, long_options, &optionIndex);
     while(c >= 0) {
-	switch(c) {
-	case 'v':
-	    printVersion();
-	    return RET_OKAY;
-	case 'h':
-	    printUsage();
-	    return RET_OKAY;
-	case 'g':
-	    graphicalFlag = 1;
-	    break;
-        case 'i':
-            interactiveFlag = 1;
-            break;
-	}
-	c = getopt_long(argc, argv, optstr, long_options, &optionIndex);
+        switch(c) {
+            case 'v':
+                printVersion();
+                return RET_OKAY;
+            case 'h':
+                printUsage();
+                return RET_OKAY;
+            case 'g':
+                graphicalFlag = 1;
+                break;
+            case 'i':
+                interactiveFlag = 1;
+                break;
+        }
+        c = getopt_long(argc, argv, optstr, long_options, &optionIndex);
     }
 
     char* wordsearchLoc;
     char* wordsLoc;
 
     if(optind >= argc) {
-	printUsage();
-	return RET_OKAY;
+        printUsage();
+        return RET_OKAY;
     }
 
     wordsearchLoc = argv[optind];
     optind++;
 
     if(optind >= argc && !interactiveFlag) {
-	printUsage();
-	return RET_OKAY;
+        printUsage();
+        return RET_OKAY;
     }
 
     Wordsearch search = readWordsearch(wordsearchLoc);
@@ -85,21 +85,21 @@ int main(int argc, char** argv) {
         char** words = readWords(wordsLoc, &numWords);
 
         if(words == NULL) {
-	    fprintf(stderr, "Failed to read words.\n");
-	    return RET_FILE_FORMAT_ERROR;
+            fprintf(stderr, "Failed to read words.\n");
+            return RET_FILE_FORMAT_ERROR;
         }
 
         int i;
         for(i = 0; i < numWords; i++) {
-	    char* word = words[i];
+            char* word = words[i];
             handleWord(word, search, graphicalFlag);
-	}
+        }
     }
     else {
         while(true) {
             char word[MAX_WORD_LEN];
             scanf("%s", word);
-            
+
             if(strcmp(word, "END_INTERACTIVE") != 0) {
                 handleWord(word, search, graphicalFlag);
             }
@@ -114,27 +114,27 @@ int main(int argc, char** argv) {
 void handleWord(char* word, Wordsearch search, int graphicalFlag) {
     int numLocs;
     Location* locs = solve(search, word, &numLocs);
-    
+
     if(!graphicalFlag) {
-	int a;
-	for(a = 0; a < numLocs; a++) {
-    	    printf("%s : (%d,%d) (%d,%d)\n",
-    	        word,
-	        locs[a].x1,
-	        locs[a].y1,
-	        locs[a].x2,
-	        locs[a].y2);
-	}
+        int a;
+        for(a = 0; a < numLocs; a++) {
+            printf("%s : (%d,%d) (%d,%d)\n",
+                    word,
+                    locs[a].x1,
+                    locs[a].y1,
+                    locs[a].x2,
+                    locs[a].y2);
+        }
         if(numLocs == 0) {
             printf("%s : Not found\n", word);
         }
     }
     else {
-	printf("%s:\n", word);
-	printLocs(search, locs, numLocs);
-	printf("\n");
+        printf("%s:\n", word);
+        printLocs(search, locs, numLocs);
+        printf("\n");
     }
- 
+
 }
 void printUsage() {
     printf("Usage: searchsolve WORDSEARCH WORDS [options]\n");
