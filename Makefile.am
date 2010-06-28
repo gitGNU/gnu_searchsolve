@@ -16,4 +16,4 @@
 #     along with Searchsolve.  If not, see <http://www.gnu.org/licenses/>.
 
 
-SUBDIRS = searchsolve doc test
+SUBDIRS = searchsolve test

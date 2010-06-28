@@ -24,7 +24,7 @@ AC_INIT([searchsolve], [2.2a], [searchsolve-main@nongnu.org])
 
 AC_CONFIG_SRCDIR([searchsolve/wordsearch.c])
 AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_FILES([Makefile searchsolve/Makefile test/Makefile doc/Makefile])
+AC_CONFIG_FILES([Makefile searchsolve/Makefile test/Makefile])
 
 AC_CONFIG_AUX_DIR([build-aux])
 

@@ -16,14 +16,41 @@
     along with Searchsolve.  If not, see <http://www.gnu.org/licenses/>.
 
 
---- GENERAL INFO
+--- INSTALLATION
+
+Run "./configure" to generate the Makefile. See ./configure --help for flags.
+Run "make" to actually build the binarys
+Run "make install" as root to install.
 
 Please run "make check" to run tests. 
 (Pipe to "sed -f test/color.sed" for color)
 
 
-At the moment, the build process is something like
-this:
+--- USAGE
 
-Compile libsearchsolve.a (Static only)
-Link searchsolve and searchview with libsearchsolve.a
+A call to searchsolve is like this:
+	searchsolve [-g] wordsearch-file words-file
+
+If the option [-i] is specified, words-file should not be specifed and words
+will be typed in interactively.
+
+See "searchsolve --help" for flags.
+
+
+--- FILE FORMATS
+
+---- WORDSEARCH
+
+WIDTH HEIGHT
+.................
+.................
+.................
+
+
+---- WORDS
+
+NUMBER OF WORDS
+.........
+.........
+.........
+.........
