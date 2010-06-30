@@ -15,6 +15,12 @@
     You should have received a copy of the GNU General Public License
     along with Searchsolve.  If not, see <http://www.gnu.org/licenses/>.
 
+------------------------- SEARCHSOLVE 2.2
+	* searchview = searchsolve -g
+	* Add interactive mode
+	* Test changes
+	* README instead of info
+
 
 ------------------------- SEARCHSOLVE 2.1
 	* Add searchview
