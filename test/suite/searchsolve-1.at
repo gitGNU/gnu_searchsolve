@@ -12,8 +12,7 @@ hah : (3,4) (5,2)
 ])
 
 AT_DATA([search],
-[7 7
-rawrhbz
+[rawrhbz
 rwaraaz
 asfabhz
 rreaafz

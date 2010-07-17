@@ -23,6 +23,8 @@
 
 #include "common.h"
 
+#define MAX_WORDSEARCH_WIDTH 255
+
 typedef struct wordsearch_t {
     int width;
     int height;

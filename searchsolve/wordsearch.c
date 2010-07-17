@@ -29,47 +29,90 @@ Wordsearch readWordsearch(char* loc) {
         exit(RET_FILE_ERROR);
     }
 
-    Wordsearch wordsearch;
+    
+    /*
+     * The grid is stored in the format of x, y
+     * However, the easiest way to read it is to read a row at a time.
+     * Current Implementation reads a tempWordsearch in the format of y, x
+     * Then it copies it into the real grid and frees the tempWordsearch
+     *
+     * In theory, it would be nice to do a refactor to make it y, x.
+     * However, x, y makes more sense from a mathematical perspective.
+     * Implementation may change.
+     */
 
-    int result =  fscanf(file, 
-            "%d %d\n", 
-            &(wordsearch.width), 
-            &(wordsearch.height));
+    Wordsearch tempWordsearch;
+    tempWordsearch.grid = 0;
+    tempWordsearch.height = 0;
 
-    if(result < 2) {
-        fprintf(stderr, "Error: Bad first line of search file.\n");
-        exit(RET_FILE_FORMAT_ERROR);
-    }
-
-    wordsearch.grid = malloc(sizeof(char*) * wordsearch.width);
-    if(wordsearch.grid == NULL) {
-        fprintf(stderr, "Out of memory while allocating grid.\n");
-        exit(RET_MEM_ERROR);
-    }
-
-    int i;
-    for(i = 0; i < wordsearch.width; i++) {
-        wordsearch.grid[i] = malloc(sizeof(char) * wordsearch.height);
-        if(wordsearch.grid[i] == NULL) {
-            fprintf(stderr, "Out of memory while allocating grid.\n");
+    int result = 1;
+    while(result >= 1) {
+        char* row = malloc(sizeof(char) * MAX_WORDSEARCH_WIDTH);
+        if(row == NULL) {
+            fprintf(stderr, "Out of memory while allocating row of wordsearch\n");
             exit(RET_MEM_ERROR);
         }
-    }
 
-    int row;
-    for(row = 0; row < wordsearch.height; row++) {
-        int col;
-        for(col = 0; col < wordsearch.width; col++) {
-            int result = fscanf(file, "%c", &(wordsearch.grid[col][row]));
-            if(result < 1) {
-                fprintf(stderr, "Malformed search file. Could not read char.");
-                exit(RET_FILE_FORMAT_ERROR);
+        result = fscanf(file, "%s\n", row);
+
+        /* result >= 1 means it read a row */
+        if(result >= 1) {
+            tempWordsearch.height++;
+
+            if(tempWordsearch.height == 1) { /* First row, set the width */
+                tempWordsearch.width = strlen(row);
             }
+            else { /* Check the width */
+                if(tempWordsearch.width != strlen(row)) {
+                    fprintf(stderr, "Wordsearch must be rectangular.\n");
+                    exit(RET_FILE_FORMAT_ERROR);
+                }
+            }
+
+            tempWordsearch.grid = realloc(
+                tempWordsearch.grid, sizeof(char*) * tempWordsearch.height);
+            if(tempWordsearch.grid == NULL) {
+                fprintf(stderr, "Out of memory while allocating wordsearch\n");
+                exit(RET_MEM_ERROR);
+            }
+            tempWordsearch.grid[tempWordsearch.height - 1] = row;
         }
-        int result = fscanf(file, "\n");
-        /* Ignore result... */
     }
 
+    /* We are now done with IO and need to rotate the wordsearch */
+
+    Wordsearch wordsearch;
+    wordsearch.width = tempWordsearch.width;
+    wordsearch.height = tempWordsearch.height;
+
+    wordsearch.grid = malloc(sizeof(char*) * wordsearch.height);
+    if(wordsearch.grid == NULL) {
+        fprintf(stderr, "Out of memory while allocating wordsearch\n");
+    }
+    
+    int x;
+    for(x = 0; x < wordsearch.width; x++) {
+        wordsearch.grid[x] = malloc(sizeof(char) * wordsearch.width);
+        if(wordsearch.grid[x] == NULL) {
+            fprintf(stderr, "Out of memory while allocating wordsearch\n");
+            exit(RET_MEM_ERROR);
+        }
+        
+        int y;
+        for(y = 0; y < wordsearch.height; y++) {
+            wordsearch.grid[x][y] = tempWordsearch.grid[y][x];
+        }
+    }
+
+    /* Free the tempWordsearch */
+
+    int y;
+    for(y = 0; y < tempWordsearch.height; y++) {
+        free(tempWordsearch.grid[y]);
+    }
+    free(tempWordsearch.grid);
+
+    /* Finally, we are done. */
     return wordsearch;
 }
 

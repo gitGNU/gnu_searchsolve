@@ -13,8 +13,7 @@ a : (1,1) (1,1)
 
 
 AT_DATA([search],
-[3 3
-bbb
+[bbb
 bab
 bbb
 ])
