@@ -34,6 +34,10 @@ clean-local:
 distclean-local:
 	rm -f atconfig
 
+check-color:
+	$(MAKE) check | sed -f color.sed
+
+
 AUTOM4TE = $(SHELL) $(top_srcdir)/build-aux/missing --run autom4te
 AUTOTEST = $(AUTOM4TE) --language=autotest
 $(TESTSUITE): $(srcdir)/testsuite.at $(srcdir)/suite/*.at $(srcdir)/package.m4

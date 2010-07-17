@@ -17,3 +17,7 @@
 
 
 SUBDIRS = searchsolve test
+
+# Color version of check (uses test/color.sed)
+check-color:
+	$(MAKE) -C test check-color
