@@ -34,19 +34,17 @@ char** readWords(char* loc, int* numWords) {
 
     /* Size (as it grows) */
     int i = 0;
-    while(true) {
+    int result = 1;
+    while(result >= 1) {
         char* word = malloc(sizeof(char) * MAX_WORD_LEN);
 
-        int result = fscanf(wordFile, "%255s\n", word);
+        result = fscanf(wordFile, "%255s\n", word);
 
         /* result >= 1 indicates that it found a word */
         if(result >= 1) {
             i++;
             words = realloc(words, sizeof(char*) * i);
             words[i - 1] = word; /* Newly filled word is words[i - 1] */
-        }
-        else {
-            break;
         }
     }
 
