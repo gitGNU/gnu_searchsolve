@@ -23,8 +23,7 @@ zzzrrdz
 ])
 
 AT_DATA(words,
-[3
-rawr
+[rawr
 bah
 hah
 ])

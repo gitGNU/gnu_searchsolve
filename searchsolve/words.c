@@ -30,31 +30,27 @@ char** readWords(char* loc, int* numWords) {
         exit(RET_FILE_ERROR);
     }
 
-    int result = fscanf(wordFile, "%d\n", numWords);
+    char** words = NULL;
 
-    if(result < 1) {
-        fprintf(stderr, "First line of words file must contain number of words.\n");
-        exit(RET_FILE_FORMAT_ERROR);
-    }
+    /* Size (as it grows) */
+    int i = 0;
+    while(true) {
+        char* word = malloc(sizeof(char) * MAX_WORD_LEN);
 
-    char** words = malloc(sizeof(char*) * (*numWords));
-    if(words == NULL) {
-        fprintf(stderr, "Out of memory while allocating words.");
-    }
+        int result = fscanf(wordFile, "%255s\n", word);
 
-    int i;
-    for(i = 0; i < *numWords; i++) {
-        words[i] = malloc(sizeof(char) * MAX_WORD_LEN);
-
-        char* word;
-
-        int result = fscanf(wordFile, "%255s\n", words[i]);
-
-        if(result < 1) {
-            fprintf(stderr, "Malformed words file. Could not read word.\n");
-            exit(RET_FILE_FORMAT_ERROR);
+        /* result >= 1 indicates that it found a word */
+        if(result >= 1) {
+            i++;
+            words = realloc(words, sizeof(char*) * i);
+            words[i - 1] = word; /* Newly filled word is words[i - 1] */
+        }
+        else {
+            break;
         }
     }
+
+    (*numWords) = i;
 
     return words;
 }
